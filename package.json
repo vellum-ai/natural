@@ -1,0 +1,11 @@
+{
+  "name": "natural",
+  "version": "0.1.0",
+  "description": "Hosted MCP access to Natural payment operations for Vellum assistants.",
+  "license": "MIT",
+  "type": "module",
+  "peerDependencies": {
+    "@vellumai/plugin-api": ">=0.11.0 <1.0.0"
+  },
+  "vellum": {}
+}
