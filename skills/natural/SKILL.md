@@ -11,7 +11,7 @@ metadata:
 
 # Natural payment playbooks
 
-Use Natural's hosted MCP tools for wallet and payment operations. Prefer inspection before mutation, state exactly what will happen, and verify the result from the tool response.
+Use Natural's hosted MCP tools for wallet and payment operations through a host-managed Natural agent key. The agent key must identify the configured Vellum agent. Do not switch to OAuth or a regular user API key. Prefer inspection before mutation, state exactly what will happen, and verify the result from the tool response.
 
 ## Read-only playbooks
 

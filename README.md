@@ -13,7 +13,9 @@ The plugin does not contain a REST client, local tools, hooks, routes, apps, API
 
 ## Authentication
 
-Authenticate through the Vellum host's MCP authentication flow or credential vault, according to the Natural account and deployment environment. Credentials must remain host-managed and must not be added to `mcp.json`, source files, or documentation.
+Use a Natural **agent key** for this connector. Agent keys attribute actions to the configured Vellum agent instead of attributing them only to the user account. Do not use OAuth or a regular Natural API key for this integration.
+
+The Vellum host must inject the agent key as bearer authentication for `https://mcp.natural.com`. Keep the secret in host-managed credential storage. Never add it to `mcp.json`, source files, README examples, logs, or committed configuration.
 
 ## Payment safety
 
