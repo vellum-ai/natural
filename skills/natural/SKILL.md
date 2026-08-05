@@ -11,7 +11,21 @@ metadata:
 
 # Natural payment playbooks
 
-Use Natural's hosted MCP tools for wallet and payment operations through a host-managed Natural agent key. The agent key must identify the configured Vellum agent. Do not switch to OAuth or a regular user API key. Prefer inspection before mutation, state exactly what will happen, and verify the result from the tool response.
+Use Natural's hosted MCP tools for wallet and payment operations through a host-managed Natural agent key. The agent key must identify the configured Vellum agent. Do not switch to OAuth or a regular party API key.
+
+## Setup before asking for the key
+
+When Natural is not authenticated, explain these steps **before** opening the secure credential prompt:
+
+1. Ask the user to create or sign in to a Natural account at `https://www.natural.com/` and complete onboarding.
+2. Tell the user to open the Natural dashboard and create an agent for this assistant, or select an existing agent.
+3. Tell the user to issue an **agent key** for that agent. Do not use a regular party API key. If the dashboard's labels or permissions are unclear, direct the user to Natural's team rather than guessing.
+4. Tell the user to copy the agent key and keep it private.
+5. Only then open the secure Vellum credential prompt labelled **Natural agent key**. Never request the secret in chat.
+
+Use Natural's dashboard or partner-provided documentation when the user needs the exact agent-creation and key-issuance screens. After setup, verify authentication with `get_identity` and confirm that the response identifies an agent before attempting any payment operation.
+
+Prefer inspection before mutation, state exactly what will happen, and verify the result from the tool response.
 
 ## Read-only playbooks
 
