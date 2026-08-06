@@ -17,13 +17,26 @@ Use a Natural **agent key** for this connector. Agent keys bind actions to one N
 
 ### Setup steps
 
-1. Create or sign in to a Natural account at [natural.com](https://www.natural.com/), then complete onboarding.
-2. In the Natural dashboard, create an agent for this assistant, or select an existing agent.
-3. Issue an **agent key** for that agent. Do not use a regular party API key. Natural's team should be the source of truth for the exact dashboard action and credential scope.
-4. Copy the agent key when Natural shows it. Keep the full secret private.
-5. Return to Vellum and paste the key into the secure **Natural agent key** prompt. Never paste it into chat, source control, `mcp.json`, or a normal message.
+The setup flow is browser-first and executable. When Natural is unauthenticated, the assistant must call the `host_natural_setup` tool with `action=start`. That runs the supported command:
 
-Use Natural's dashboard or partner-provided documentation for the exact agent-creation and key-issuance screens. The key is used as a bearer token against `https://mcp.natural.com`.
+```sh
+assistant browser tabs new --url https://www.natural.com/ --json
+```
+
+A new browser tab opens at [natural.com](https://www.natural.com/). In that tab:
+
+1. Sign in or sign up for Natural and complete onboarding.
+2. Create an agent for this assistant, or select an existing agent.
+3. Issue an **agent key** for that agent. Do not use OAuth or a regular party API key.
+4. Keep the agent key private and return to Vellum.
+
+Only after the user confirms they have returned with the agent key ready may the assistant call `host_natural_setup` with `action=prompt` and `onboarding_complete=true`. That runs the supported secure prompt command using the existing storage identity:
+
+```sh
+assistant credentials prompt --service natural --field api_key ...
+```
+
+Never paste the key into chat, tool input, source control, `mcp.json`, or a normal message. The key is used as a bearer token against `https://mcp.natural.com` and is stored only in the encrypted credential vault.
 
 The Vellum host injects the agent key securely. Keep the secret in host-managed credential storage. Never add it to `mcp.json`, source files, README examples, logs, or committed configuration.
 

@@ -13,17 +13,18 @@ metadata:
 
 Use Natural's hosted MCP tools for wallet and payment operations through a host-managed Natural agent key. The agent key must identify the configured Vellum agent. Do not switch to OAuth or a regular party API key.
 
-## Setup before asking for the key
+## Browser-first setup before asking for the key
 
-When Natural is not authenticated, explain these steps **before** opening the secure credential prompt:
+When Natural is not authenticated, use the executable `host_natural_setup` tool before using any Natural MCP tool. It enforces a two-phase flow and never opens a credential prompt first.
 
-1. Ask the user to create or sign in to a Natural account at `https://www.natural.com/` and complete onboarding.
-2. Tell the user to open the Natural dashboard and create an agent for this assistant, or select an existing agent.
-3. Tell the user to issue an **agent key** for that agent. Do not use a regular party API key. If the dashboard's labels or permissions are unclear, direct the user to Natural's team rather than guessing.
-4. Tell the user to copy the agent key and keep it private.
-5. Only then open the secure Vellum credential prompt labelled **Natural agent key**. Never request the secret in chat.
+1. Call `host_natural_setup` with `action=start`. It executes the supported command `assistant browser tabs new --url https://www.natural.com/ --json` and opens a new browser tab at `https://www.natural.com/`.
+2. Tell the user to sign in or sign up in that tab and complete onboarding.
+3. Tell the user to create an agent for this assistant, or select an existing agent.
+4. Tell the user to issue an **agent key** for that agent. Do not use OAuth or a regular party API key.
+5. Tell the user to keep the agent key private and return here.
+6. Only after the user confirms they are back and the agent key is ready, call `host_natural_setup` with `action=prompt` and `onboarding_complete=true`. It executes the supported secure command `assistant credentials prompt --service natural --field api_key ...`.
 
-Use Natural's dashboard or partner-provided documentation when the user needs the exact agent-creation and key-issuance screens. After setup, verify authentication with `get_identity` and confirm that the response identifies an agent before attempting any payment operation.
+The credential identity must remain `natural/api_key` even though the value is a Natural agent key. Never request or accept the secret in chat or tool input. After setup, verify authentication with `get_identity` and confirm that the response identifies an agent before attempting any payment operation.
 
 Prefer inspection before mutation, state exactly what will happen, and verify the result from the tool response.
 
