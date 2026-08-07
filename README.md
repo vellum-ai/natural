@@ -17,10 +17,10 @@ Use a Natural **agent key** for this connector. Agent keys bind actions to one N
 
 ### Setup steps
 
-Setup is driven by the skill script `skills/natural/scripts/natural_setup.sh`, not by a host tool. When Natural is unauthenticated, the assistant runs:
+Setup is driven by the skill script `skills/natural/scripts/natural_setup.ts`, run with Bun, not by a host tool. When Natural is unauthenticated, the assistant runs:
 
 ```sh
-skills/natural/scripts/natural_setup.sh start
+bun skills/natural/scripts/natural_setup.ts start
 ```
 
 That prints the onboarding steps and makes a best-effort attempt to open [natural.com](https://www.natural.com/) using whatever URL opener the machine provides (`$BROWSER`, `xdg-open`, `open`, `wslview`). It assumes no particular browser tooling: if nothing can open a URL, it says so and the assistant or the user opens the link instead. At natural.com:
@@ -33,7 +33,7 @@ That prints the onboarding steps and makes a best-effort attempt to open [natura
 Only after the user confirms they have returned with the agent key ready may the assistant run:
 
 ```sh
-skills/natural/scripts/natural_setup.sh prompt --onboarding-complete
+bun skills/natural/scripts/natural_setup.ts prompt --onboarding-complete
 ```
 
 The script refuses to reach this phase before `start` has run, and refuses without the explicit `--onboarding-complete` confirmation. It then opens the host's secure credential prompt for service `natural`, field `api_key`. Where the host offers no such prompt, the script stores nothing and explains that the user must save the key in host credential storage under that same identity.

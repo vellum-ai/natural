@@ -15,15 +15,15 @@ Use Natural's hosted MCP tools for wallet and payment operations through a host-
 
 ## Natural onboarding before asking for the key
 
-When Natural is not authenticated, run `scripts/natural_setup.sh` before using any Natural MCP tool. It enforces a two-phase flow and never opens a credential prompt first.
+When Natural is not authenticated, run `scripts/natural_setup.ts` with Bun before using any Natural MCP tool. It enforces a two-phase flow and never opens a credential prompt first.
 
-1. Run `scripts/natural_setup.sh start`. It prints the onboarding steps and makes a best-effort attempt to open `https://www.natural.com/` with whatever URL opener the machine has.
+1. Run `bun scripts/natural_setup.ts start`. It prints the onboarding steps and makes a best-effort attempt to open `https://www.natural.com/` with whatever URL opener the machine has.
 2. If the script reports that it could not open the URL, open `https://www.natural.com/` with whatever browser capability you have, or ask the user to open it. Do not assume any particular browser tool exists.
 3. Tell the user to sign in or sign up at Natural and complete onboarding.
 4. Tell the user to create an agent for this assistant, or select an existing agent.
 5. Tell the user to issue an **agent key** for that agent. Do not use OAuth or a regular party API key.
 6. Tell the user to keep the agent key private and return here.
-7. Only after the user confirms they are back and the agent key is ready, run `scripts/natural_setup.sh prompt --onboarding-complete`. It opens the host's secure credential prompt for service `natural`, field `api_key`. If no such prompt exists on this host, the script says so and explains where the user must store the key instead; relay that and stop rather than collecting the key yourself.
+7. Only after the user confirms they are back and the agent key is ready, run `bun scripts/natural_setup.ts prompt --onboarding-complete`. It opens the host's secure credential prompt for service `natural`, field `api_key`. If no such prompt exists on this host, the script says so and explains where the user must store the key instead; relay that and stop rather than collecting the key yourself.
 
 The credential identity must remain `natural/api_key` even though the value is a Natural agent key. Never request or accept the secret in chat, in a file, or as a script argument. After setup, verify authentication with `get_identity` and confirm that the response identifies an agent before attempting any payment operation.
 
