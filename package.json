@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "peerDependencies": {
-    "@vellumai/plugin-api": ">=0.11.0 <1.0.0"
+    "@vellumai/plugin-api": ">=0.11.4 <1.0.0"
   },
   "vellum": {}
 }
