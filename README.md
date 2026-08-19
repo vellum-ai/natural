@@ -1,6 +1,6 @@
 # Natural
 
-Stage 1 Vellum plugin for Natural's hosted Model Context Protocol (MCP) server.
+Vellum plugin for Natural's hosted Model Context Protocol (MCP) server.
 
 ## Getting Started
 
@@ -21,15 +21,6 @@ assistant plugins install https://github.com/vellum-ai/natural
 Installing by URL is for QA: it is how a version gets exercised on a real assistant before it is published for review. It clones this tree verbatim and bypasses the catalog, so the source is untrusted and the CLI prints a warning naming it. Point it at a branch or a fork to test a change that is not on `main` yet.
 
 Use the name, not the URL, once the plugin is published.
-
-## Scope
-
-This plugin is intentionally thin. It contributes:
-
-- A standard HTTP MCP connection to `https://mcp.natural.com`
-- A payment-operation skill with confirmation and safety playbooks, plus a setup script the skill runs
-
-The plugin does not contain a REST client, host tools, hooks, routes, apps, API keys, or personal identifiers.
 
 ## Authentication
 
