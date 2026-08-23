@@ -15,7 +15,7 @@ Use Natural's hosted MCP tools for wallet and payment operations. The plugin dec
 
 ## Authorization
 
-Prefer the client's connection settings. The user authorizes the Natural MCP server there with hosted OAuth. The browser opens Natural's authorization page. Tell the user to pick an agent on that screen so tool calls act as that agent. Do not collect a key in chat.
+Prefer connecting to Natural using the plugin's MCP settings, which enables the user to authorize the Natural MCP server with hosted OAuth. The browser opens Natural's authorization page.
 
 After authorization, verify with `get_identity` and confirm that the response identifies an agent before any payment operation.
 
