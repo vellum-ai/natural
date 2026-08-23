@@ -1,5 +1,8 @@
 #!/usr/bin/env bun
-// Natural agent-key setup helper.
+// Natural agent-key fallback helper.
+//
+// Prefer the plugin's root mcp.json plus the host's MCP connection settings
+// (hosted OAuth). Run this script only when that path is unavailable.
 //
 //   bun natural_setup.ts start
 //   bun natural_setup.ts prompt --onboarding-complete
@@ -173,7 +176,8 @@ async function cmdPrompt(args: string[]): Promise<number> {
 
   if (await runCredentialPrompt()) {
     console.log(`The Natural agent key was stored in the host credential vault under service
-natural and field api_key. The MCP configuration remains endpoint-only.
+natural and field api_key. Root mcp.json stays endpoint-only: it names
+https://mcp.natural.com and must not carry the key.
 Verify with get_identity before any payment operation.`);
     return 0;
   }

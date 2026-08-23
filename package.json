@@ -1,6 +1,6 @@
 {
   "name": "natural",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Hosted MCP access to Natural payment operations for Vellum assistants.",
   "license": "MIT",
   "type": "module",
